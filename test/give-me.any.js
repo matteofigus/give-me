@@ -20,7 +20,7 @@ describe('The GiveMe.any function', function(){
     var a = function(callback){ setTimeout((function(){ callback("a") }), 2000); }
     var b = function(callback){ setTimeout((function(){ callback("b") }), 100); }
 
-    giveMe.any([a, b], function(result){
+    giveMe.first([a, b], function(result){
       result.should.be.eql(["[Not processed yet]",["b"]]);
       done();
     });
