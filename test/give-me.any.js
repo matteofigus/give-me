@@ -10,7 +10,7 @@ describe('The GiveMe.any function', function(){
     var b = function(callback){ setTimeout((function(){ callback("b") }), 100); }
 
     giveMe.any([a, b], function(result){
-      result.should.be.eql(["[Not processed]",["b"]]);
+      result.should.be.eql(["[Not processed yet]",["b"]]);
       done();
     });
   });
@@ -21,7 +21,7 @@ describe('The GiveMe.any function', function(){
     var b = function(callback){ setTimeout((function(){ callback("b") }), 100); }
 
     giveMe.any([a, b], function(result){
-      result.should.be.eql(["[Not processed]",["b"]]);
+      result.should.be.eql(["[Not processed yet]",["b"]]);
       done();
     });
   });
