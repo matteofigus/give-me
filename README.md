@@ -8,7 +8,7 @@ I've nothing against promises in js, but for me node is about semplicity, and pr
 
 Another problem is that this libraries usually need you to make your deferred functions work as they want. Usually, just one argument is accepted, and its callback needs to have one or two arguments.
 
-Give-me does all the dirty work, and allow you to use your functions exactly as they are. The only convention is that the callback argument needs to be the last in every function
+Give-me does all the dirty work, and allow you to use your functions exactly as they are. The only convention is that the callback arguments need to be the last in every function.
 
 ## Installation
 
@@ -16,7 +16,7 @@ Give-me does all the dirty work, and allow you to use your functions exactly as 
 
 ### all(functions [, arguments] [, callback])
 
-Runs an array of functions in parallel, and returns (with a callback) an array of callbacks in the same order
+Runs an array of functions in parallel, and returns (with a callback) an array of callbacks in the same order when all the functions had been executed.
 
 	var giveMe = require('give-me');
 
@@ -33,9 +33,16 @@ Functions could need some parameters to work, they can be included in the option
 	var giveMe = require('give-me');
 
 	var a = function(parameter1, parameter2, callback){ 
-		setTimeout((function(){ callback(parameter1 + " " + parameter2) }), 200); };
+		setTimeout((function(){ 
+			callback(parameter1 + " " + parameter2);
+		}), 200); 
+	};
 
-	var b = function(parameter3, callback){ setTimeout((function(){ callback("hello", parameter3) }), 100); }
+	var b = function(parameter3, callback){ 
+		setTimeout((function(){ 
+			callback("hello", parameter3);
+		}), 100); 
+	}
 
 	giveMe.all([a, b], [["hello", "world"], ["hi"]], function(result){
 		console.log(result);
@@ -43,10 +50,11 @@ Functions could need some parameters to work, they can be included in the option
 	});
 
 
-### any(functions [, arguments] [, callback]) // Alias: first
+### any(functions [, arguments] [, callback])
 	
-Runs an array of functions in parallel, but returns (with a callback) just the first, ignoring all the other callbacks.
+Runs an array of functions in parallel, but returns (with a callback) just the fastest, ignoring all the other callbacks.
 
+	var giveMe = require('give-me');
   
     var a = function(callback){ setTimeout((function(){ callback("a") }), 2000); }
     var b = function(callback){ setTimeout((function(){ callback("b") }), 100); }
