@@ -20,8 +20,8 @@ Runs an array of functions in parallel, and returns (with a callback) an array o
 
 	var giveMe = require('give-me');
 
-	var a = function(callback){ setTimeout((function(){ callback("a") }), 200); };
-	var b = function(callback){ setTimeout((function(){ callback("b") }), 100); };
+	var a = function(callback){ setTimeout((function(){ callback("a"); }), 200); };
+	var b = function(callback){ setTimeout((function(){ callback("b"); }), 100); };
 
 	giveMe.all([a, b], function(result){
 		console.log(result);
@@ -42,7 +42,7 @@ Functions could need some parameters to work, they can be included in the option
 		setTimeout((function(){ 
 			callback("hello", parameter3);
 		}), 100); 
-	}
+	};
 
 	giveMe.all([a, b], [["hello", "world"], ["hi"]], function(result){
 		console.log(result);
@@ -56,8 +56,8 @@ Runs an array of functions in parallel, but returns (with a callback) just the f
 
 	var giveMe = require('give-me');
   
-    var a = function(callback){ setTimeout((function(){ callback("a") }), 2000); }
-    var b = function(callback){ setTimeout((function(){ callback("b") }), 100); }
+    var a = function(callback){ setTimeout((function(){ callback("a"); }), 2000); };
+    var b = function(callback){ setTimeout((function(){ callback("b"); }), 100); };
 
     giveMe.any([a, b], function(result){
     	console.log(result);
