@@ -1,0 +1,27 @@
+{
+  "name": "give-me",
+  "version": "0.0.1",
+  "description": "A simple async manager",
+  "author": "Matteo Figus <matteofigus@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matteofigus/give-me.git"
+  },
+  "issues": "https://github.com/matteofigus/give-me/issues",
+  "keywords": ["async", "give me", "deferred"],
+  "main":"index",
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "should": "",
+    "mocha": ""
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
