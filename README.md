@@ -2,7 +2,7 @@ give-me
 =============
 [![Build Status](https://secure.travis-ci.org/matteofigus/give-me.png?branch=master)](http://travis-ci.org/matteofigus/give-me)
 
-# About promises with js and node.js
+## About promises with js and node.js
 
 I've nothing against promises in js, but for me node is about semplicity, and promises are something that in my opinion should be managed in a very easy way with Javascript. All the libraries I've found use the "then" syntax to manage chaining, and require to wrap deferred functions inside a promise init/return.
 
@@ -10,11 +10,11 @@ Another problem is that this libraries usually need you to make your deferred fu
 
 Give-me does all the dirty work, and allow you to use your functions exactly as they are. The only convention is that the callback argument needs to be the last in every function
 
-# Installation
+## Installation
 
 	npm install give-me
 
-# all(functions [, arguments] [, callback])
+### all(functions [, arguments] [, callback])
 
 Runs an array of functions in parallel, and returns (with a callback) an array of callbacks in the same order
 
@@ -43,7 +43,7 @@ Functions could need some parameters to work, they can be included in the option
 	});
 
 
-# any(functions [, arguments] [, callback]) // Alias: first
+### any(functions [, arguments] [, callback]) // Alias: first
 	
 Runs an array of functions in parallel, but returns (with a callback) just the first, ignoring all the other callbacks.
 
@@ -56,6 +56,6 @@ Runs an array of functions in parallel, but returns (with a callback) just the f
     	// will display ["[Not processed yet]",["b"]]
     });
 
-# License
+## License
 
 MIT
