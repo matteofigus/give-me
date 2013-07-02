@@ -65,7 +65,7 @@ Runs an array of functions in parallel, but returns (with a callback) just the f
     });
 
 	
-Using the optional "conditionalFunction" parameter the callback will be called when the fastest callback will satisfy a requirement provided through a sync function (in the example above, the c function is the fastest, the callback for function b is anyway appended as processed before).
+Using the optional "conditionalFunction" parameter the callback will be called when the fastest callback will satisfy a requirement provided through a sync function (in the example above, the "c" function is the fastest that satisfies the condition, the callback for function b is anyway appended as processed before but it does not satisfies the requirement).
 
 	var giveMe = require('give-me');
   
