@@ -28,7 +28,7 @@ Runs an array of functions in parallel, and returns (with a callback) an array o
 		// will display [["a"],["b"]]
 	});
 
-Functions could need some parameters to work, they can be included in the optional "arguments" parameter. Just keep the callback in the end
+Functions could need some parameters to work, they can be included in the optional "arguments" parameter. Just keep the callbacks in the end.
 
 	var giveMe = require('give-me');
 
@@ -67,6 +67,8 @@ Runs an array of functions in parallel, but returns (with a callback) just the f
 	
 Using the optional "conditionalFunction" parameter the callback will be called when the fastest callback will satisfy a requirement provided through a sync function (in the example above, the c function is the fastest, the callback for function b is anyway appended as processed before).
 
+	var giveMe = require('give-me');
+  
     var a = function(param, callback){ setTimeout((function(){ callback(param) }), 200); }
     var b = function(param, callback){ setTimeout((function(){ callback(param) }), 50); }
     var c = function(param, callback){ setTimeout((function(){ callback(param) }), 100); }
