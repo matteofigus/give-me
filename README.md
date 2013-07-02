@@ -14,7 +14,7 @@ Give-me does all the dirty work, and allow you to use your functions exactly as 
 
 	npm install give-me
 
-### all(functions [, arguments] [, callback])
+### all(functions [, arguments], callback)
 
 Runs an array of functions in parallel, and returns (with a callback) an array of callbacks in the same order when all the functions had been executed.
 
@@ -50,7 +50,7 @@ Functions could need some parameters to work, they can be included in the option
 	});
 
 
-### any(functions [, arguments] [, callback])
+### any(functions [, arguments] [, conditionalFunction], callback)
 	
 Runs an array of functions in parallel, but returns (with a callback) just the fastest, ignoring all the other callbacks.
 
@@ -62,6 +62,20 @@ Runs an array of functions in parallel, but returns (with a callback) just the f
     giveMe.any([a, b], function(result){
     	console.log(result);
     	// will display ["[Not processed yet]",["b"]]
+    });
+
+	
+Using the optional "conditionalFunction" parameter the callback will be called when the fastest callback will satisfy a requirement provided through a sync function (in the example above, the c function is the fastest, the callback for function b is anyway appended as processed before).
+
+    var a = function(param, callback){ setTimeout((function(){ callback(param) }), 200); }
+    var b = function(param, callback){ setTimeout((function(){ callback(param) }), 50); }
+    var c = function(param, callback){ setTimeout((function(){ callback(param) }), 100); }
+
+    giveMe.any([a, b, c], [true, false, true], function(itemCallback){
+    	return itemCallback[0] == true;
+    }, function(result){
+    	console.log(result);
+    	// will display ["[Not processed yet]", [false], [true]]
     });
 
 ## License
