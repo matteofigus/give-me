@@ -1,4 +1,3 @@
-
 var should = require('should');
 
 var giveMe = require('./../index');
