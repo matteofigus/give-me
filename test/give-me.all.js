@@ -69,6 +69,16 @@ describe('The GiveMe.all function', function(){
     });
   });
 
+  it('should accept a single parameter as function if the same is executed with multiple arguments', function(done) {
+  
+    var f = function(param, delay, callback){ setTimeout((function(){ callback(param) }), delay); }
+
+    giveMe.all(f, [["a", 200] , ["b", 100]], function(result){
+      result.should.be.eql([["a"], ["b"]]);
+      done();
+    });
+  });
+
   it('should handle functions with optional arguments', function(done) {
   
     var a = function(param, callback){ 

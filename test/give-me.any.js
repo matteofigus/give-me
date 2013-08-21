@@ -52,4 +52,14 @@ describe('The GiveMe.any function', function(){
       done();
     });
   });
+
+  it('should accept a single parameter as function if the same is executed with multiple arguments', function(done) {
+  
+    var f = function(param, delay, callback){ setTimeout((function(){ callback(param) }), delay); }
+
+    giveMe.any(f, [["a", 200] , ["b", 100]], function(result){
+      result.should.be.eql(["[Not processed yet]", ["b"]]);
+      done();
+    });
+  });
 });
