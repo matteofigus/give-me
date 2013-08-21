@@ -15,7 +15,7 @@
   "main":"index",
   "engines": {
     "node": ">=0.8.x",
-    "npm": "1.1.x"
+    "npm": ">=1.1.x"
   },
   "dependencies": {
   },
