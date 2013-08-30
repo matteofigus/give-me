@@ -39,6 +39,16 @@ describe('The GiveMe.any function', function(){
     });
   });
 
+  it('should accept a single parameter as function if I need to execute it one time', function(done) {
+  
+    var f = function(param, delay, callback){ setTimeout((function(){ callback(param) }), delay); }
+
+    giveMe.any(f, [["a", 200]], function(result){
+      result.should.be.eql([["a"]]);
+      done();
+    });
+  });
+
   it('should do the callback after processing all the functions if the requirement is not satisfied by anyone', function(done) {
   
     var a = function(param, callback){ setTimeout((function(){ callback(param) }), 200); }
