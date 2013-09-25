@@ -79,3 +79,6 @@ Using the optional "conditionalFunction" parameter the callback will be called w
 ## License
 
 MIT
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/matteofigus/give-me/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
