@@ -1,6 +1,7 @@
-give-me
+give-me [![Build Status](https://secure.travis-ci.org/matteofigus/give-me.png?branch=master)](http://travis-ci.org/matteofigus/give-me)
 =============
-[![Build Status](https://secure.travis-ci.org/matteofigus/give-me.png?branch=master)](http://travis-ci.org/matteofigus/give-me)
+
+[![NPM](https://nodei.co/npm/give-me.png?downloads=true)](https://npmjs.org/package/give-me)
 
 ## How it works
 
