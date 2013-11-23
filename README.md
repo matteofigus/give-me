@@ -59,30 +59,30 @@ Runs an array of functions in parallel, but returns (with a callback) just the f
 ```js
 var giveMe = require('give-me');
 
-  var a = function(callback){ setTimeout((function(){ callback("a"); }), 2000); };
-  var b = function(callback){ setTimeout((function(){ callback("b"); }), 100); };
+var a = function(callback){ setTimeout((function(){ callback("a"); }), 2000); };
+var b = function(callback){ setTimeout((function(){ callback("b"); }), 100); };
 
-  giveMe.any([a, b], function(result){
-  	console.log(result);
-  	// will display ["[Not processed yet]",["b"]]
-  });
+giveMe.any([a, b], function(result){
+	console.log(result);
+	// will display ["[Not processed yet]",["b"]]
+});
 ```
 	
 Using the optional "conditionalFunction" parameter the callback will be called when the fastest callback will satisfy a requirement provided through a sync function (in the example above, the "c" function is the fastest that satisfies the condition, the callback for function b is anyway appended as processed before but it does not satisfies the requirement).
 
 ```js
-	var giveMe = require('give-me');
-  
-    var a = function(param, callback){ setTimeout((function(){ callback(param) }), 200); }
-    var b = function(param, callback){ setTimeout((function(){ callback(param) }), 50); }
-    var c = function(param, callback){ setTimeout((function(){ callback(param) }), 100); }
+var giveMe = require('give-me');
 
-    giveMe.any([a, b, c], [true, false, true], function(itemCallback){
-    	return itemCallback[0] == true;
-    }, function(result){
-    	console.log(result);
-    	// will display ["[Not processed yet]", [false], [true]]
-    });
+var a = function(param, callback){ setTimeout((function(){ callback(param) }), 200); }
+var b = function(param, callback){ setTimeout((function(){ callback(param) }), 50); }
+var c = function(param, callback){ setTimeout((function(){ callback(param) }), 100); }
+
+giveMe.any([a, b, c], [true, false, true], function(itemCallback){
+	return itemCallback[0] == true;
+}, function(result){
+	console.log(result);
+	// will display ["[Not processed yet]", [false], [true]]
+});
 ```
 
 ## License
