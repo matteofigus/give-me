@@ -14,7 +14,7 @@ describe('The GiveMe.any function', function(){
       var now = new Date() - time;
 
       result.should.be.eql(["[Not processed yet]",["b"]]);
-      now.should.be.within(10, 12);
+      now.should.be.within(9, 12);
       done();
     });
   });

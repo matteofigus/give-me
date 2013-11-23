@@ -23,7 +23,7 @@ describe('The GiveMe.all function', function(){
 
     giveMe.all([a, b], function(result){
       var now = new Date() - start;
-      now.should.be.within(20,22);
+      now.should.be.within(19,22);
       done();
     });
   });
