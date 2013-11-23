@@ -9,61 +9,68 @@ Give-me takes care of executing deferred functions in parallel, and allow you to
 
 ## Installation
 
+```shell
 	npm install give-me
+```
 
 ### all(functions [, arguments], callback)
 
 Runs an array of functions in parallel, and returns (with a callback) an array of callbacks in the same order when all the functions had been called.
 
-	var giveMe = require('give-me');
+```js
+var giveMe = require('give-me');
 
-	var a = function(callback){ setTimeout((function(){ callback("a"); }), 200); };
-	var b = function(callback){ setTimeout((function(){ callback("b"); }), 100); };
+var a = function(callback){ setTimeout((function(){ callback("a"); }), 200); };
+var b = function(callback){ setTimeout((function(){ callback("b"); }), 100); };
 
-	giveMe.all([a, b], function(result){
-		console.log(result);
-		// will display [["a"],["b"]]
-	});
+giveMe.all([a, b], function(result){
+	console.log(result);
+	// will display [["a"],["b"]]
+});
+```
 
 Functions could need some parameters to work, they can be included in the optional "arguments" parameter. Just keep the callbacks in the end.
 
-	var giveMe = require('give-me');
+```js
+var giveMe = require('give-me');
 
-	var a = function(parameter1, parameter2, callback){ 
-		setTimeout((function(){ 
-			callback(parameter1 + " " + parameter2);
-		}), 200); 
-	};
+var a = function(parameter1, parameter2, callback){ 
+	setTimeout((function(){ 
+		callback(parameter1 + " " + parameter2);
+	}), 200); 
+};
 
-	var b = function(parameter3, callback){ 
-		setTimeout((function(){ 
-			callback("hello", parameter3);
-		}), 100); 
-	};
+var b = function(parameter3, callback){ 
+	setTimeout((function(){ 
+		callback("hello", parameter3);
+	}), 100); 
+};
 
-	giveMe.all([a, b], [["hello", "world"], ["hi"]], function(result){
-		console.log(result);
-		// will display [["hello world"],["hello", "hi"]]
-	});
-
+giveMe.all([a, b], [["hello", "world"], ["hi"]], function(result){
+	console.log(result);
+	// will display [["hello world"],["hello", "hi"]]
+});
+```
 
 ### any(functions [, arguments] [, conditionalFunction], callback)
 	
 Runs an array of functions in parallel, but returns (with a callback) just the fastest, ignoring all the other callbacks.
 
-	var giveMe = require('give-me');
-  
-    var a = function(callback){ setTimeout((function(){ callback("a"); }), 2000); };
-    var b = function(callback){ setTimeout((function(){ callback("b"); }), 100); };
+```js
+var giveMe = require('give-me');
 
-    giveMe.any([a, b], function(result){
-    	console.log(result);
-    	// will display ["[Not processed yet]",["b"]]
-    });
+  var a = function(callback){ setTimeout((function(){ callback("a"); }), 2000); };
+  var b = function(callback){ setTimeout((function(){ callback("b"); }), 100); };
 
+  giveMe.any([a, b], function(result){
+  	console.log(result);
+  	// will display ["[Not processed yet]",["b"]]
+  });
+```
 	
 Using the optional "conditionalFunction" parameter the callback will be called when the fastest callback will satisfy a requirement provided through a sync function (in the example above, the "c" function is the fastest that satisfies the condition, the callback for function b is anyway appended as processed before but it does not satisfies the requirement).
 
+```js
 	var giveMe = require('give-me');
   
     var a = function(param, callback){ setTimeout((function(){ callback(param) }), 200); }
@@ -76,10 +83,11 @@ Using the optional "conditionalFunction" parameter the callback will be called w
     	console.log(result);
     	// will display ["[Not processed yet]", [false], [true]]
     });
+```
 
 ## License
 
 MIT
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/matteofigus/give-me/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/matteofigus/give-me/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
