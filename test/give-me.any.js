@@ -5,19 +5,24 @@ var giveMe = require('./../index');
 describe('The GiveMe.any function', function(){
   it('should retrieve the faster callback', function(done) {
   
-    var a = function(callback){ setTimeout((function(){ callback("a") }), 2000); }
-    var b = function(callback){ setTimeout((function(){ callback("b") }), 100); }
+    var a = function(callback){ setTimeout((function(){ callback("a") }), 20); }
+    var b = function(callback){ setTimeout((function(){ callback("b") }), 10); }
+
+    var time = new Date();
 
     giveMe.any([a, b], function(result){
+      var now = new Date() - time;
+
       result.should.be.eql(["[Not processed yet]",["b"]]);
+      now.should.be.within(10, 12);
       done();
     });
   });
 
   it('should work with the \'first\' alias as well', function(done) {
   
-    var a = function(callback){ setTimeout((function(){ callback("a") }), 2000); }
-    var b = function(callback){ setTimeout((function(){ callback("b") }), 100); }
+    var a = function(callback){ setTimeout((function(){ callback("a") }), 20); }
+    var b = function(callback){ setTimeout((function(){ callback("b") }), 10); }
 
     giveMe.first([a, b], function(result){
       result.should.be.eql(["[Not processed yet]",["b"]]);
@@ -27,9 +32,9 @@ describe('The GiveMe.any function', function(){
 
   it('should work with a conditional optional function', function(done) {
   
-    var a = function(param, callback){ setTimeout((function(){ callback(param + 10) }), 200); }
-    var b = function(param, callback){ setTimeout((function(){ callback(param + 20) }), 50); }
-    var c = function(param, callback){ setTimeout((function(){ callback(param + 30) }), 100); }
+    var a = function(param, callback){ setTimeout((function(){ callback(param + 10) }), 30); }
+    var b = function(param, callback){ setTimeout((function(){ callback(param + 20) }), 10); }
+    var c = function(param, callback){ setTimeout((function(){ callback(param + 30) }), 20); }
 
     giveMe.any([a, b, c], [-10, 0, -30], function(functionResult){
       return functionResult == 0;
@@ -43,7 +48,7 @@ describe('The GiveMe.any function', function(){
   
     var f = function(param, delay, callback){ setTimeout((function(){ callback(param) }), delay); }
 
-    giveMe.any(f, [["a", 200]], function(result){
+    giveMe.any(f, [["a", 20]], function(result){
       result.should.be.eql([["a"]]);
       done();
     });
@@ -51,9 +56,9 @@ describe('The GiveMe.any function', function(){
 
   it('should do the callback after processing all the functions if the requirement is not satisfied by anyone', function(done) {
   
-    var a = function(param, callback){ setTimeout((function(){ callback(param) }), 200); }
-    var b = function(param, callback){ setTimeout((function(){ callback(param) }), 50); }
-    var c = function(param, callback){ setTimeout((function(){ callback(param) }), 100); }
+    var a = function(param, callback){ setTimeout((function(){ callback(param) }), 30); }
+    var b = function(param, callback){ setTimeout((function(){ callback(param) }), 10); }
+    var c = function(param, callback){ setTimeout((function(){ callback(param) }), 20); }
 
     giveMe.any([a, b, c], [false, false, false], function(functionResult){
       return functionResult == true;
@@ -67,7 +72,7 @@ describe('The GiveMe.any function', function(){
   
     var f = function(param, delay, callback){ setTimeout((function(){ callback(param) }), delay); }
 
-    giveMe.any(f, [["a", 200] , ["b", 100]], function(result){
+    giveMe.any(f, [["a", 20] , ["b", 10]], function(result){
       result.should.be.eql(["[Not processed yet]", ["b"]]);
       done();
     });
