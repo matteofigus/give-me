@@ -5,12 +5,12 @@ give-me [![Build Status](https://secure.travis-ci.org/matteofigus/give-me.png?br
 
 ## How it works
 
-Give-me takes care of executing deferred functions in parallel, and allow you to use your functions exactly as they are keeping the well-known callback style. The only convention is that the callback arguments need to be the last in every function.
+Give-me takes care of executing deferred functions in parallel/sequence, and allows you to use your functions exactly as they are keeping the well-known callback style. The only convention is that the callback arguments need to be the last in every function.
 
 ## Installation
 
 ```shell
-	npm install give-me
+npm install give-me
 ```
 
 ### all(functions [, arguments], callback)
@@ -29,7 +29,7 @@ giveMe.all([a, b], function(result){
 });
 ```
 
-Functions could need some parameters to work, they can be included in the optional "arguments" parameter. Just keep the callbacks in the end.
+If functions need some parameters to work, they can be included in the optional "arguments" parameter. Just keep the callbacks in the end.
 
 ```js
 var giveMe = require('give-me');
