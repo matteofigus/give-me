@@ -1,6 +1,6 @@
 {
   "name": "give-me",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "A simple js library to manage deferred functions with a callbacks-style syntax",
   "author": "Matteo Figus <matteofigus@gmail.com>",
   "license": "MIT",
@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/matteofigus/give-me/issues"
   },
-  "keywords": ["async", "give me", "deferred", "callback", "promises"],
+  "keywords": ["async", "give me", "deferred", "callback", "promises", "parallel", "sequence"],
   "main":"index",
   "engines": {
     "node": ">=0.6.x",
