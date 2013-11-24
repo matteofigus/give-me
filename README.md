@@ -85,6 +85,22 @@ giveMe.any([a, b, c], [true, false, true], function(itemCallback){
 });
 ```
 
+### sequence(functions [, arguments], callback)
+
+Runs an array of functions in sequence, and returns (with a callback) an array of callbacks in the same order when all the functions had been called. 
+
+```js
+var giveMe = require('give-me');
+
+var a = function(callback){ setTimeout((function(){ callback("a"); }), 200); };
+var b = function(callback){ setTimeout((function(){ callback("b"); }), 100); };
+
+giveMe.sequence([a, b], function(result){
+	console.log(result);
+	// will display [["a"],["b"]] after ~300ms
+});
+```
+
 ## License
 
 MIT
