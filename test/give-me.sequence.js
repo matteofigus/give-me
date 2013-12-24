@@ -1,6 +1,7 @@
 var should = require('should');
 
 var giveMe = require('./../index');
+var _ = require('./../lib/utils');
 
 describe('The GiveMe.sequence function', function(){
 
@@ -50,6 +51,39 @@ describe('The GiveMe.sequence function', function(){
       done();
     });
       
+  });
+
+  it('should execute one functions without parameters', function(done){
+
+    var fn = function(callback){ 
+      setTimeout(function() {
+        callback('hello');
+      }, 10);
+    };
+
+    giveMe.sequence([fn], function(callbacks){
+      callbacks.should.be.eql([['hello']]);
+      done();
+    });      
+  });
+
+  it('should execute one functions with a binded context', function(done){
+
+    var MyClass = function(sentence){
+      this.sentence = sentence;
+
+      this.hello = function(name, callback){
+        callback(this.sentence + ' ' + name);
+      };
+    };
+
+    var myClassIstance = new MyClass('My name is'),
+        parameters = [['Micky Mouse'], ['Donald Duck']];
+
+    giveMe.sequence(_.bind(myClassIstance.hello, myClassIstance), parameters, function(callbacks){
+      callbacks.should.be.eql([['My name is Micky Mouse'], ['My name is Donald Duck']]);
+      done();
+    });      
   });
 
 });
