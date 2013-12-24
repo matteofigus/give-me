@@ -27,8 +27,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "should": "",
-    "mocha": ""
+    "should": "2.1.1",
+    "mocha": "1.16.2"
   },
   "scripts": {
     "test": "mocha"
