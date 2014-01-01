@@ -1,6 +1,6 @@
 {
   "name": "give-me",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "A simple js library to manage deferred functions with a callbacks-style syntax",
   "author": "Matteo Figus <matteofigus@gmail.com>",
   "license": "MIT",
