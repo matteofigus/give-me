@@ -13,7 +13,7 @@ Give-me takes care of executing deferred functions in parallel/sequence, and all
 npm install give-me
 ```
 
-### all(functions [, arguments], callback)
+### all(functions [, arguments] [, maxConcurrency], callback)
 
 Runs an array of functions in parallel, and returns (with a callback) an array of callbacks in the same order when all the functions had been called.
 
