@@ -156,9 +156,45 @@ describe('The GiveMe.all function', function(){
 
       result.should.be.eql([['hello a'],['hello b'],['hello c'],['hello d'],['hello e'],['hello f']]);
 
-      now.should.be.within(19,22);
+      now.should.be.within(18,23);
 
       done();
+    });
+  });
+
+  describe('when tuple-callback used', function(){
+
+    var errorFunc = function(callback){ setTimeout(function() { callback('an error'); }, 10); };
+    var emptyFunc = function(callback){ setTimeout(function() { callback(); }, 10); };
+    var nullFunc = function(callback){ setTimeout(function() { callback(null); }, 10); };
+    var successFunc = function(callback){ setTimeout(function() { callback(null, 'hello'); }, 10); };
+    var undefinedFunc = function(callback){ setTimeout(function() { callback(undefined); }, 10); };
+
+    it('should return errors and results separately in case of tuples result', function(done){
+
+      giveMe.all([errorFunc, successFunc, errorFunc], function(errors, results){
+        errors.should.be.eql(['an error', null, 'an error']);
+        results.should.be.eql([null, 'hello', null]);
+        done();
+      });
+    });
+
+    it('should return null errors and results when no errors', function(done){
+
+      giveMe.all([successFunc, successFunc], function(errors, results){
+        (errors === null).should.be.true;
+        results.should.be.eql(['hello', 'hello']);
+        done();
+      });
+    });
+
+    it('should return null errors and results when null undefined and null error callbacks present', function(done){
+
+      giveMe.all([nullFunc, undefinedFunc, emptyFunc], function(errors, results){
+        (errors === null).should.be.true;
+        results.should.be.eql([null, null, null]);
+        done();
+      });
     });
   });
 });
