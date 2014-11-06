@@ -165,10 +165,12 @@ describe('The GiveMe.all function', function(){
   describe('when tuple-callback used', function(){
 
     var errorFunc = function(callback){ setTimeout(function() { callback('an error'); }, 10); };
+    var successFunc = function(callback){ setTimeout(function() { callback(null, 'hello'); }, 10); };
+
     var emptyFunc = function(callback){ setTimeout(function() { callback(); }, 10); };
     var nullFunc = function(callback){ setTimeout(function() { callback(null); }, 10); };
-    var successFunc = function(callback){ setTimeout(function() { callback(null, 'hello'); }, 10); };
     var undefinedFunc = function(callback){ setTimeout(function() { callback(undefined); }, 10); };
+    var threeFunc = function(callback){ setTimeout(function() { callback(1, 2, 3); }, 10); };
 
     it('should return errors and results separately in case of tuples result', function(done){
 
@@ -193,6 +195,15 @@ describe('The GiveMe.all function', function(){
       giveMe.all([nullFunc, undefinedFunc, emptyFunc], function(errors, results){
         (errors === null).should.be.true;
         results.should.be.eql([null, null, null]);
+        done();
+      });
+    });
+
+    it('should return errors and ignore extra results in case of callback arguments.length > 2', function(done){
+
+      giveMe.all([threeFunc, threeFunc], function(errors, results){
+        errors.should.be.eql([1,1]);
+        results.should.be.eql([2,2]);
         done();
       });
     });
