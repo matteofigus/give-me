@@ -5,7 +5,7 @@ give-me [![Build Status](https://secure.travis-ci.org/matteofigus/give-me.png?br
 
 ## How it works
 
-Give-me takes care of executing deferred functions in parallel/sequence, and allows you to use your functions exactly as they are keeping the well-known callback style. The only convention is that the callback arguments need to be the last in every function.
+Give-me takes care of executing deferred functions in parallel/sequence, and allows you to use your functions exactly as they are keeping the well-known callback style. The only convention is that the callback arguments need to be the last in every function. The callback object is an array of callback results. When tuple argument provided (err, res) tries to return 2 arrays of results. In case the first array (supposed to be the errors) is an array of empty values it is nullified (so that callback is a function(x, y) => null, array).
 
 ## Installation
 
