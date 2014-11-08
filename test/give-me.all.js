@@ -181,6 +181,15 @@ describe('The GiveMe.all function', function(){
       });
     });
 
+    it('should return errors and results separately when used with maxConcurrency option', function(done){
+
+      giveMe.all([errorFunc, successFunc, errorFunc], 2, function(errors, results){
+        errors.should.be.eql(['an error', null, 'an error']);
+        results.should.be.eql([null, 'hello', null]);
+        done();
+      });
+    });
+
     it('should return null errors and results when no errors', function(done){
 
       giveMe.all([successFunc, successFunc], function(errors, results){

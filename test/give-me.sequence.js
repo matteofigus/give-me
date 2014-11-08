@@ -86,4 +86,61 @@ describe('The GiveMe.sequence function', function(){
     });      
   });
 
+  describe('when tuple-callback used', function(){
+
+    var errorFunc = function(callback){ setTimeout(function() { callback('an error'); }, 10); };
+    var successFunc = function(callback){ setTimeout(function() { callback(null, 'hello'); }, 10); };
+
+    var emptyFunc = function(callback){ setTimeout(function() { callback(); }, 10); };
+    var nullFunc = function(callback){ setTimeout(function() { callback(null); }, 10); };
+    var undefinedFunc = function(callback){ setTimeout(function() { callback(undefined); }, 10); };
+    var threeFunc = function(callback){ setTimeout(function() { callback(1, 2, 3); }, 10); };
+
+    it('should return errors and results separately in case of tuples result', function(done){
+
+      giveMe.sequence([errorFunc, successFunc, errorFunc], function(errors, results){
+        errors.should.be.eql(['an error', null, 'an error']);
+        results.should.be.eql([null, 'hello', null]);
+        done();
+      });
+    });
+
+    it('should return null errors and results when no errors', function(done){
+
+      giveMe.sequence([successFunc, successFunc], function(errors, results){
+        (errors === null).should.be.true;
+        results.should.be.eql(['hello', 'hello']);
+        done();
+      });
+    });
+
+    it('should return null errors and results when null undefined and null error callbacks present', function(done){
+
+      giveMe.sequence([nullFunc, undefinedFunc, emptyFunc], function(errors, results){
+        (errors === null).should.be.true;
+        results.should.be.eql([null, null, null]);
+        done();
+      });
+    });
+
+    it('should return errors and ignore extra results in case of callback arguments.length > 2', function(done){
+
+      giveMe.sequence([threeFunc, threeFunc], function(errors, results){
+        errors.should.be.eql([1,1]);
+        results.should.be.eql([2,2]);
+        done();
+      });
+    });
+
+    it('should return errors and results when callback is passed by reference', function(done){
+
+      var callback = function(errors, results){
+        errors.should.be.eql([null, 'an error', 'an error', null]);
+        results.should.be.eql(['hello', null, null, 'hello']);
+        done();
+      };
+
+      giveMe.sequence([successFunc, errorFunc, errorFunc, successFunc], callback);
+    });
+  });
 });
