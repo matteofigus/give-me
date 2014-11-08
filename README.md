@@ -65,7 +65,7 @@ var successFunc = function(callback){
 	setTimeout((function(){  callback(null, 'hello'); }), 100); 
 };
 
-giveMe.all([successFunc, errorFunc], function(errors, results){
+giveMe.all([errorFunc, successFunc], function(errors, results){
 	console.log(errors); // will display ['error', null]
 	console.log(results); // will display [null, 'hello'];
 });
